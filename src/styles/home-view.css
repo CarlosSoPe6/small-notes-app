@@ -1,0 +1,5 @@
+div.home-view-container {
+    height: calc(100vh - 80px);
+    width: calc(100% - 360px);
+    box-sizing: border-box;
+}

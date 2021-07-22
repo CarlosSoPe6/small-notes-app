@@ -1,0 +1,16 @@
+div.sidebar-container, div.sidebar {
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    width: 360px;
+    height: calc(100vh - 80px);
+}
+
+div.sidebar-container.collapsed, div.sidebar-container.collapsed > div.sidebar {
+    width: 80px;
+}
+
+div.sidebar {
+    border-right:  1px solid rgb(219, 219, 219);
+    overflow: auto;
+}

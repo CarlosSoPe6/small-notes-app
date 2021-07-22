@@ -1,0 +1,16 @@
+div.navbar-container, nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    height: 80px;
+    width: 100%;
+}
+
+nav {
+    border-bottom:  1px solid rgb(219, 219, 219);
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    align-items:center;
+}
