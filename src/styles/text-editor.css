@@ -6,16 +6,13 @@ div.text-editor-container {
     overflow-x: auto;
 }
 
-div.text-editor-container > div.text-editor {
+div.text-editor-container > textarea {
     min-width: 100%;
     max-width: 100%;
     min-height: 100%;
     max-height: 100%;
     overflow-wrap: break-word;
     display: inline-block;
-}
-
-div.text-editor-container > div.text-editor:active {
     border: none;
     outline: none;
 }

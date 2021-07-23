@@ -1,10 +1,12 @@
 import { Reducer } from 'redux';
+import { DisplayType } from '../../pages/Home/components/TextEditor';
 import { EditorAction } from '../actions/editorActions';
 import EditorReducerError from './EditorReducerError';
 
 export interface EditorState {
   notes: Note[];
   loadedNote?: number;
+  displayType: DisplayType;
 }
 
 export interface Note {
@@ -19,8 +21,13 @@ const initialState: EditorState = {
       title: 'Ejemplo',
       body: '# Ejemplo\nSaludo',
     },
+    {
+      title: 'Ejemplo 2',
+      body: '# Ejemplo 2\nSaludo 2',
+    },
   ],
   loadedNote: undefined,
+  displayType: 'EDIT',
 };
 
 const updateNote = (state: EditorState, action: EditorAction): EditorState => {
