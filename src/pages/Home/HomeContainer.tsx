@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Sidebar from '../../components/Sidebar';
-import { loadNote, updateNote } from '../../redux/actions/editorActions';
-import { EditorState, Note } from '../../redux/reducers/editorReducer';
-import { DisplayType } from './components/TextEditor';
+import { useDispatch } from 'react-redux';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import { addNote, loadNote, toogleDisplayType, updateNote } from '../../redux/actions/editorActions';
+import { Note } from '../../redux/reducers/editorReducer';
 import HomeView from './HomeView';
+import useInitHome from './hooks/useInitHome';
 
 export interface HomeContainerProps {
 
@@ -12,26 +12,44 @@ export interface HomeContainerProps {
 
 const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Element {
   const dispatch = useDispatch();
-  const notes = useSelector<EditorState, Array<Note>>(state => state.notes);
-  const loadedNote = useSelector<EditorState, number | undefined>(state => state.loadedNote);
-  const displayType = useSelector<EditorState, DisplayType>(state => state.displayType);
-  const onUpdate = (text: string) => {
+  const {
+    notes,
+    loadedNote,
+    displayType,
+    isCollapsed,
+  } = useInitHome();
+  const onUpdate = (title: string, body: string) => {
     if (loadedNote !== undefined) {
-      const note: Note = { ...notes[loadedNote], body: text };
+      const note: Note = { ...notes[loadedNote], title, body };
       dispatch(updateNote(note));
     }
+  };
+  const onDisplayTypeChange = () => {
+    dispatch(toogleDisplayType());
+  };
+  const onAddNote = () => {
+    console.log('onAddNote');
+    dispatch(addNote('New note'));
+  };
+  const onRemoveNote = () => {
+    console.log('Hola');
   };
   return (
     <div className="main-content-container home-container">
         <Sidebar
-          items={notes.map((e, i) => ({ name: e.title, id: i }))}
+          isCollapsed={isCollapsed}
+          items={notes.map((e, i) => ({ name: e.title, id: i, key: e.id }))}
           onClick={(id) => dispatch(loadNote(id))}
+          onAddNote={onAddNote}
+          onRemoveNote={onRemoveNote}
         />
         <HomeView
+          isCollapsed={!isCollapsed}
           displayType={displayType}
           loadedNote={loadedNote}
           notes={notes}
-          onUpdate={onUpdate}
+          onUpdateNote={onUpdate}
+          onDisplayTypeChange={onDisplayTypeChange}
         />
     </div>
   );

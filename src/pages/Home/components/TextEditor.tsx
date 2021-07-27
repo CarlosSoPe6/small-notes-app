@@ -5,14 +5,13 @@ import ReactMarkdown from 'react-markdown';
 import '../../../styles/text-editor.css';
 
 type SetDisplayTypeHandler = React.Dispatch<React.SetStateAction<DisplayType>>;
-export type OnUpdateTextEditorHandler = (text: string) => void;
 export type DisplayType = 'VIEW' | 'EDIT';
 
 export interface MDEditorProps {
   rawTextValue: string;
   loadedNote?: number
   displayType: DisplayType;
-  onUpdate: OnUpdateTextEditorHandler;
+  onUpdateBody: (text: string) => void;
 }
 
 const onFocusHandler = (setDisplayType: SetDisplayTypeHandler) => {
@@ -26,17 +25,17 @@ const onBlurHandler = (setDisplayType: SetDisplayTypeHandler) => {
 const MDEditor: FC<MDEditorProps> = function TextEditor({
   rawTextValue,
   displayType,
-  onUpdate,
+  onUpdateBody,
   loadedNote,
 }): JSX.Element {
-  const isContentEditable = rawTextValue !== '' && displayType === 'EDIT';
+  const isContentEditable = displayType === 'EDIT';
   return (
     <div className="text-editor-container">
       {isContentEditable ? (
           <textarea
             key={loadedNote}
             defaultValue={rawTextValue}
-            onChange={(e) => onUpdate(e.currentTarget.value)}
+            onChange={(e) => onUpdateBody(e.currentTarget.value)}
           />
       ) :
           <ReactMarkdown>{rawTextValue}</ReactMarkdown>}

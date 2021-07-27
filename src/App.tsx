@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import HomeContainer from './pages/Home/HomeContainer';
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <Navbar hasSidebar />
       <div>
         <HomeContainer />
       </div>

@@ -1,5 +1,11 @@
-div.home-view-container {
+div.home-view-container.collapsed {
     height: calc(100vh - 80px);
     width: calc(100% - 360px);
+    box-sizing: border-box;
+}
+
+div.home-view-container {
+    height: calc(100vh - 80px);
+    width: calc(100% - 80px);
     box-sizing: border-box;
 }

@@ -14,3 +14,14 @@ nav {
     display: flex;
     align-items:center;
 }
+
+nav > div.sidebar-offset {
+    width: 360px;
+    height: 80px;
+    display: flex;
+    align-items:center;
+}
+
+nav > div.sidebar-offset.collapsed {
+    width: 80px;
+} 

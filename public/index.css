@@ -19,7 +19,7 @@ h3 {
   font-weight: 700;
   line-height: 15.4px;
 }
-p, a, button, textarea, input {
+p, a, button, textarea, input, label {
   font-family: "Open Sans";
   font-size: 14px;
   font-style: normal;

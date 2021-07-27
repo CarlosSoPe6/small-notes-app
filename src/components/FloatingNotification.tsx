@@ -7,7 +7,7 @@ export interface FloatingNotificationProps {
 const FloatingNotification: FC<FloatingNotificationProps> =
   function FloatingNotification(): JSX.Element {
     return (
-      <div className="navbar-container">
+      <div className="navbar-container" role="alert">
           Sidebar
       </div>
     );
