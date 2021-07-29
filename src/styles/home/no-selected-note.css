@@ -1,0 +1,9 @@
+div.no-selected-note {
+    width: 100%;
+    height: 100%;
+}
+
+div.no-selected-note > p {
+    text-align: center;
+    line-height: calc(100vh - 80px);
+}

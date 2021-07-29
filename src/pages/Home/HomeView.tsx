@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import TextEditor, { DisplayType } from './components/TextEditor';
-import '../../styles/home-view.css';
-import { Note } from '../../redux/reducers/editorReducer';
 import EditorActionBar, { OnDisplayTypeChangeHandler } from './components/EditorActionBar';
+import NoSelectedNote from './components/NoSelectedNote';
+import Note from '../../models/Note';
+
+import '../../styles/home/home-view.css';
 
 export interface HomeViewProps {
   loadedNote?: number;
@@ -15,18 +17,28 @@ export interface HomeViewProps {
 
 const HomeView: FC<HomeViewProps> = function HomeView(props): JSX.Element {
   const { loadedNote, notes, isCollapsed, onUpdateNote } = props;
-  const rawTextValue = loadedNote !== undefined ? notes[loadedNote].body : '';
-  const rawTitle = loadedNote !== undefined ? notes[loadedNote].title : '';
+  const note = loadedNote !== undefined ? notes[loadedNote] : null;
   const onUpdateBody = (body: string) => {
-    onUpdateNote(rawTitle, body);
+    if (note === null) {
+      return;
+    }
+    onUpdateNote(note.title, body);
   };
   const onUpdateTitle = (title: string) => {
-    onUpdateNote(title, rawTextValue);
+    if (note === null) {
+      return;
+    }
+    onUpdateNote(title, note.body);
   };
   return (
     <div role="main" className={`home-view-container ${isCollapsed ? 'collapsed' : ''}`}>
-      <EditorActionBar title={rawTitle} onUpdateTitle={onUpdateTitle} {...props} />
-      <TextEditor rawTextValue={rawTextValue} onUpdateBody={onUpdateBody} {...props} />
+      { note ? (
+        <>
+          <EditorActionBar note={note} onUpdateTitle={onUpdateTitle} {...props} />
+          <TextEditor note={note} onUpdateBody={onUpdateBody} {...props} />
+        </>
+      ) :
+        <NoSelectedNote />}
     </div>
   );
 };

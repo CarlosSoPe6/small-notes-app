@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import '../../styles/sidebar-item.css';
+import '../../styles/sidebar/sidebar-item.css';
 
 export type OnSidebarItemClickHandler = (key: number) => void;
 

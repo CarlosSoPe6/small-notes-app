@@ -1,18 +1,17 @@
 import { Reducer } from 'redux';
+import Note from '../../models/Note';
 import { DisplayType } from '../../pages/Home/components/TextEditor';
 import { EditorAction } from '../actions/editorActions';
 import EditorReducerError from './EditorReducerError';
+
+type SaveExecutorHandler =
+  ((s: EditorState, a: EditorAction) => EditorState) |
+  ((s: EditorState) => EditorState);
 
 export interface EditorState {
   notes: Note[];
   loadedNote?: number;
   displayType: DisplayType;
-}
-
-export interface Note {
-  id: string;
-  title: string;
-  body: string;
 }
 
 const initialState: EditorState = {
@@ -21,8 +20,14 @@ const initialState: EditorState = {
   displayType: 'VIEW',
 };
 
-const saveNotes = (state: EditorState) => {
-  localStorage.setItem('notes', JSON.stringify(state));
+const saveNotes = (
+  callback: SaveExecutorHandler,
+  state: EditorState,
+  action: EditorAction,
+) => {
+  const newState = callback(state, action);
+  localStorage.setItem('notes', JSON.stringify(newState));
+  return newState;
 };
 
 const loadAllNotes = (state: EditorState): EditorState => {
@@ -33,6 +38,17 @@ const loadAllNotes = (state: EditorState): EditorState => {
   }
   const newState: EditorState = JSON.parse(rawNotes);
   return newState;
+};
+
+const removeNote = (state: EditorState): EditorState => {
+  if (typeof state.loadedNote === 'number') {
+    const { notes, loadedNote } = state;
+    const newNotes = [...notes];
+    newNotes.splice(loadedNote, 1);
+    const newState = { ...state, loadedNote: undefined, notes: newNotes };
+    return newState;
+  }
+  return state;
 };
 
 const updateNote = (state: EditorState, action: EditorAction): EditorState => {
@@ -50,7 +66,6 @@ const updateNote = (state: EditorState, action: EditorAction): EditorState => {
     ...state,
     notes: newNotes,
   };
-  saveNotes(newState);
   return newState;
 };
 
@@ -76,7 +91,6 @@ const saveNote = (state: EditorState, action: EditorAction): EditorState => {
     ...state,
     notes: [...updatedNotes],
   };
-  saveNotes(newState);
   return newState;
 };
 
@@ -96,12 +110,14 @@ const editorReducer: Reducer<EditorState, EditorAction> =
   switch (type) {
     case 'EDITOR::LOAD_ALL':
       return loadAllNotes(state);
+    case 'EDITOR::REMOVE_NOTE':
+      return saveNotes(removeNote, state, action);
     case 'EDITOR::ADD_NOTE':
-      return saveNote(state, action);
+      return saveNotes(saveNote, state, action);
     case 'EDITOR::LOAD_NOTE':
       return loadNote(state, action);
     case 'EDITOR::UPDATE_NOTE':
-      return updateNote(state, action);
+      return saveNotes(updateNote, state, action);
     case 'EDITOR::TOOGLE_DISPLAY_TYPE':
       return toogleDisplayType(state);
     default:

@@ -1,17 +1,19 @@
 import { Action } from 'redux';
-import { Note } from '../reducers/editorReducer';
+import Note from '../../models/Note';
 
 export const EDITOR_LOAD_ALL = 'EDITOR::LOAD_ALL';
 export const EDITOR_ADD_NOTE = 'EDITOR::ADD_NOTE';
 export const EDITOR_UPDATE_NOTE = 'EDITOR::UPDATE_NOTE';
 export const EDITOR_LOAD_NOTE = 'EDITOR::LOAD_NOTE';
 export const EDITOR_TOOGLE_DISPLAY_TYPE = 'EDITOR::TOOGLE_DISPLAY_TYPE';
+export const EDITOR_REMOVE_NOTE = 'EDITOR::REMOVE_NOTE';
 
 type EditorActionType = typeof EDITOR_LOAD_ALL |
                         typeof EDITOR_ADD_NOTE |
                         typeof EDITOR_UPDATE_NOTE |
                         typeof EDITOR_LOAD_NOTE |
-                        typeof EDITOR_TOOGLE_DISPLAY_TYPE;
+                        typeof EDITOR_TOOGLE_DISPLAY_TYPE |
+                        typeof EDITOR_REMOVE_NOTE;
 
 export interface EditorAction extends Action<EditorActionType> {
   payload?: Note | number;
@@ -19,6 +21,10 @@ export interface EditorAction extends Action<EditorActionType> {
 
 export const loadAllNotes = (): EditorAction => ({
   type: EDITOR_LOAD_ALL,
+});
+
+export const removeNote = (): EditorAction => ({
+  type: EDITOR_REMOVE_NOTE,
 });
 
 export const updateNote = (payload: Note): EditorAction => ({

@@ -1,0 +1,11 @@
+div.singup-content-container {
+  height: calc(100vh - 80px);
+  width: calc(100% - 80px);
+  box-sizing: border-box;
+}
+
+div.singup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

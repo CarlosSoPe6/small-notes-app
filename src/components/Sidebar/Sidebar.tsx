@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import SidebarElement, { OnSidebarItemClickHandler, SidebarItem } from './SidebarElement';
 
-import '../../styles/sidebar.css';
+import '../../styles/sidebar/sidebar.css';
 
 export type OnSidebarElementClickHandler = (id: number) => void;
 

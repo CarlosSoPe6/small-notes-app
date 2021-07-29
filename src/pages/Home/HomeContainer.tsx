@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import { addNote, loadNote, toogleDisplayType, updateNote } from '../../redux/actions/editorActions';
-import { Note } from '../../redux/reducers/editorReducer';
+import Note from '../../models/Note';
+import { addNote, loadNote, toogleDisplayType, updateNote, removeNote } from '../../redux/actions/editorActions';
 import HomeView from './HomeView';
 import useInitHome from './hooks/useInitHome';
 
@@ -24,16 +24,15 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
       dispatch(updateNote(note));
     }
   };
-  const onDisplayTypeChange = () => {
+  const onDisplayTypeChange = useCallback(() => {
     dispatch(toogleDisplayType());
-  };
-  const onAddNote = () => {
-    console.log('onAddNote');
+  }, [dispatch]);
+  const onAddNote = useCallback(() => {
     dispatch(addNote('New note'));
-  };
-  const onRemoveNote = () => {
-    console.log('Hola');
-  };
+  }, [dispatch]);
+  const onRemoveNote = useCallback(() => {
+    dispatch(removeNote());
+  }, [dispatch]);
   return (
     <div className="main-content-container home-container">
         <Sidebar

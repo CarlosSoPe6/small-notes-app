@@ -25,3 +25,15 @@ nav > div.sidebar-offset {
 nav > div.sidebar-offset.collapsed {
     width: 80px;
 } 
+
+nav > div.navbar-content {
+    width: calc(100% - 360px);
+    display: flex;
+    justify-content: space-between;
+}
+
+nav > div.navbar-content.collapsed {
+    width: calc(100% - 80px);
+    display: flex;
+    justify-content: space-between;
+}

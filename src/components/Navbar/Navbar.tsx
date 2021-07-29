@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
-import '../../styles/navbar.css';
+import { useSelector } from 'react-redux';
+import useNavbar from '../../hooks/useNavbar';
+import { GlobalState } from '../../redux/reducers/rootReducer';
+import '../../styles/navbar/navbar.css';
+import NavbarMenu, { NavbarMenuProps } from './NavbarMenu';
 import NavbarSidebar from './NavbarSidebar';
 
 export interface NavbarProps {
@@ -10,11 +14,19 @@ const Navbar: FC<NavbarProps> = function Navbar(props): JSX.Element {
   const {
     hasSidebar,
   } = props;
+  const isCollapsed = useSelector<GlobalState, boolean>(state => state.appState.sidebarCollapsed);
+  const menuItems = useNavbar();
+  const menuProps: NavbarMenuProps = { items: menuItems };
   return (
     <div className="navbar-container">
         <nav role="navigation">
-          {hasSidebar && <NavbarSidebar />}
-          <h1>Small Notes App</h1>
+          {hasSidebar && <NavbarSidebar isCollapsed={isCollapsed} />}
+          <div className={`navbar-content ${isCollapsed ? 'collapsed' : ''}`}>
+            <div className="navbar-content-header">
+              <h1>Small Notes App</h1>
+            </div>
+            <NavbarMenu {...menuProps} />
+          </div>
         </nav>
     </div>
   );

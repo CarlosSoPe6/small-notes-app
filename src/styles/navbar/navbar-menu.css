@@ -1,0 +1,17 @@
+.navbar-menu ul li{
+  text-decoration: none;
+  overflow: hidden;
+  display: inline-block;
+  padding: 5px;
+}
+
+.navbar-menu ul li a {
+  height: 100%;
+  width: 100%; 
+  text-decoration: none;
+}
+
+.navbar-menu ul li a:visited {
+  text-decoration: none;
+  color: black;
+}

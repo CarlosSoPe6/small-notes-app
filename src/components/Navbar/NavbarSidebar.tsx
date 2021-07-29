@@ -1,11 +1,13 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { GlobalState } from '../../redux/reducers/rootReducer';
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { toogleCollapse } from '../../redux/actions/appStateActions';
 
-const NavbarSidebar = () => {
+export interface NavbarSidebarProps {
+  isCollapsed: boolean;
+}
+
+const NavbarSidebar: FC<NavbarSidebarProps> = ({ isCollapsed }) => {
   const dispatch = useDispatch();
-  const isCollapsed = useSelector<GlobalState, boolean>(state => state.appState.sidebarCollapsed);
   return (
     <div className={`sidebar-offset ${isCollapsed ? 'collapsed' : ''}`}>
       <button

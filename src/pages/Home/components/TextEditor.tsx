@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC, useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import Note from '../../../models/Note';
 
-import '../../../styles/text-editor.css';
+import '../../../styles/home/text-editor.css';
 
 type SetDisplayTypeHandler = React.Dispatch<React.SetStateAction<DisplayType>>;
 export type DisplayType = 'VIEW' | 'EDIT';
 
 export interface MDEditorProps {
-  rawTextValue: string;
+  note: Note;
   loadedNote?: number
   displayType: DisplayType;
   onUpdateBody: (text: string) => void;
@@ -23,22 +24,23 @@ const onBlurHandler = (setDisplayType: SetDisplayTypeHandler) => {
 };
 
 const MDEditor: FC<MDEditorProps> = function TextEditor({
-  rawTextValue,
+  note,
   displayType,
   onUpdateBody,
   loadedNote,
 }): JSX.Element {
   const isContentEditable = displayType === 'EDIT';
+  const { body, id } = note;
   return (
     <div className="text-editor-container">
       {isContentEditable ? (
           <textarea
-            key={loadedNote}
-            defaultValue={rawTextValue}
+            key={id}
+            defaultValue={body}
             onChange={(e) => onUpdateBody(e.currentTarget.value)}
           />
       ) :
-          <ReactMarkdown>{rawTextValue}</ReactMarkdown>}
+          <ReactMarkdown>{body}</ReactMarkdown>}
     </div>
   );
 };

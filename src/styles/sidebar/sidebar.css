@@ -20,6 +20,7 @@ div.sidebar div.sidebar-actions-container {
     box-sizing: border-box;
     border-bottom: rgb(219, 219, 219) solid 1px;
     display: flex;
+    justify-content: space-between;
 }
 
 div.sidebar-actions-container > button {
