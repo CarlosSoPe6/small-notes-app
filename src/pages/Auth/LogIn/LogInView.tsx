@@ -6,12 +6,14 @@ export interface LogInViewProps {
   usernameHandler: React.ChangeEventHandler<HTMLInputElement>;
   passwordHandler: React.ChangeEventHandler<HTMLInputElement>;
   submitHandler: React.FormEventHandler<HTMLFormElement>;
+  isFetching: boolean;
 }
 
 const LogInView: FC<LogInViewProps> = ({
   usernameHandler,
   passwordHandler,
   submitHandler,
+  isFetching,
 }) => {
   return (
   <div className="login  login-content-container">
@@ -25,7 +27,7 @@ const LogInView: FC<LogInViewProps> = ({
         <br />
         <input id="lgin-password" type="password" placeholder="Password" required onChange={passwordHandler} />
         <br />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isFetching}>Login</button>
       </form>
     </div>
   </div>

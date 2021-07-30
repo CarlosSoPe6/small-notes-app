@@ -27,7 +27,7 @@ export const login = (payload: Pick<UserForm, 'username' | 'password'>) => {
     setTimeout(() => {
       dispatch(endRequest());
       console.log(payload);
-    }, 1000);
+    }, 500);
   };
 };
 
@@ -37,6 +37,6 @@ export const singup = (payload: UserForm) => {
     setTimeout(() => {
       dispatch(endRequest());
       console.log(payload);
-    }, 1000);
+    }, 500);
   };
 };
