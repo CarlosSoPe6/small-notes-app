@@ -3,10 +3,12 @@ import { AuthAction } from '../actions/authActions';
 
 export interface AuthState {
   isFetching: boolean;
+  isAuthenticated: boolean,
 }
 
 const defaultState: AuthState = {
   isFetching: false,
+  isAuthenticated: false,
 };
 
 const beginRequest = (state: AuthState): AuthState => ({
@@ -17,6 +19,7 @@ const beginRequest = (state: AuthState): AuthState => ({
 const endRequest = (state: AuthState): AuthState => ({
   ...state,
   isFetching: false,
+  isAuthenticated: true,
 });
 
 const authReducer: Reducer<AuthState, AuthAction> = (state = defaultState, action) => {

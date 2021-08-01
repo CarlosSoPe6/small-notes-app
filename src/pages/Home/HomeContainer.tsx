@@ -14,6 +14,8 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
   const dispatch = useDispatch();
   const {
     notes,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    isFetching,
     loadedNote,
     displayType,
     isCollapsed,
@@ -21,7 +23,7 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
   const onUpdate = (title: string, body: string) => {
     if (loadedNote !== undefined) {
       const note: Note = { ...notes[loadedNote], title, body };
-      dispatch(updateNote(note));
+      dispatch(updateNote(note.id, note));
     }
   };
   const onDisplayTypeChange = useCallback(() => {
@@ -31,8 +33,13 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
     dispatch(addNote('New note'));
   }, [dispatch]);
   const onRemoveNote = useCallback(() => {
-    dispatch(removeNote());
-  }, [dispatch]);
+    if (loadedNote !== undefined) {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      const note: Note = notes[loadedNote];
+      dispatch(removeNote(note.id));
+    }
+  }, [dispatch, loadedNote, notes]);
   return (
     <div className="main-content-container home-container">
         <Sidebar

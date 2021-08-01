@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import UserForm from '../../models/UserForm';
@@ -27,7 +28,7 @@ export const login = (payload: Pick<UserForm, 'username' | 'password'>) => {
     setTimeout(() => {
       dispatch(endRequest());
       console.log(payload);
-    }, 500);
+    }, 2000);
   };
 };
 
@@ -37,6 +38,6 @@ export const singup = (payload: UserForm) => {
     setTimeout(() => {
       dispatch(endRequest());
       console.log(payload);
-    }, 500);
+    }, 2000);
   };
 };

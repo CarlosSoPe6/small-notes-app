@@ -4,6 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
+import NotFoundError from './navigation/NotFound';
 import LogInContainer from './pages/Auth/LogIn/LogInContainer';
 import SingUpContainer from './pages/Auth/SingUp/SingUpContainer';
 import HomeContainer from './pages/Home/HomeContainer';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" exact component={LogInContainer} />
           <Route path="/singup" exact component={SingUpContainer} />
           <Route path="/user" exact component={UserContainer} />
+          <Route path="*" component={NotFoundError} />
         </Switch>
       </div>
     </div>

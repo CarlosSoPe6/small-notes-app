@@ -8,6 +8,7 @@ export interface SingUpViewProps {
   passwordHandler: React.ChangeEventHandler<HTMLInputElement>;
   passwordConfirmationHandler: React.ChangeEventHandler<HTMLInputElement>;
   submitHandler: React.FormEventHandler<HTMLFormElement>;
+  isFetching: boolean;
 }
 
 const SingUpView: FC<SingUpViewProps> = ({
@@ -15,6 +16,7 @@ const SingUpView: FC<SingUpViewProps> = ({
   emailHandler,
   passwordHandler,
   passwordConfirmationHandler,
+  isFetching,
 }) => {
   return (
   <div className="singup singup-content-container">
@@ -36,7 +38,7 @@ const SingUpView: FC<SingUpViewProps> = ({
         <br />
         <input id="sgup-password2" type="password" placeholder="Confirm password" required onChange={passwordConfirmationHandler} />
         <br />
-        <button type="submit">Sungup</button>
+        <button type="submit" disabled={isFetching}>Sungup</button>
       </form>
     </div>
   </div>

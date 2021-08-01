@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 
 const NotFoundError: FC<{}> = function NotFoundError(): JSX.Element {
   return (
-    <div className="home-view">
-        Home view
+    <div className="main-content-container home-view">
+        Page not found
     </div>
   );
 };
