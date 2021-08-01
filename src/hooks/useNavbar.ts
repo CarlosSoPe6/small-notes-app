@@ -9,10 +9,6 @@ const useNavbar = (): NavbarMenuItem[] => {
 
   if (authState) {
     return [
-      {
-        text: 'Me',
-        route: '/user',
-      },
     ];
   } return [
     {

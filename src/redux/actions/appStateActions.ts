@@ -16,3 +16,5 @@ export const attempLogin = (): AppStateAction => ({
 export const toogleCollapse = (): AppStateAction => ({
   type: 'APP_STATE::TOOGLE_COLLAPSE',
 });
+
+export const UNSAFE_SESSION_TRICK = attempLogin;
