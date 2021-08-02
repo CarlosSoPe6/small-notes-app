@@ -12,15 +12,11 @@ const RootPageContainer = () => {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    switch (authState) {
-      case false:
-        history.replace('/login');
-        break;
-      case true:
-        history.replace('/home');
-        break;
-      default:
-        dispatch(attempLogin());
+    if (authState === null) {
+      dispatch(attempLogin());
+    } else {
+      const newRoute = authState ? '/home' : '/login';
+      history.replace(newRoute);
     }
   }, [authState, dispatch, history]);
   return (<div />);
