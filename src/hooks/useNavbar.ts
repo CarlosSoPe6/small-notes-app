@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { NavbarMenuItem } from '../components/Navbar/NavbarMenu';
+import routes from '../config/routes';
 import { GlobalState } from '../redux/reducers/rootReducer';
 
 const useNavbar = (): NavbarMenuItem[] => {
@@ -13,11 +14,11 @@ const useNavbar = (): NavbarMenuItem[] => {
   } return [
     {
       text: 'Login',
-      route: '/login',
+      route: routes.LOG_IN,
     },
     {
       text: 'Singup',
-      route: '/singup',
+      route: routes.SING_UP,
     },
   ];
 };

@@ -4,12 +4,12 @@ import {
   Route,
 } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
+import routes from './config/routes';
 import NotFoundError from './navigation/NotFound';
 import LogInContainer from './pages/Auth/LogIn/LogInContainer';
 import SingUpContainer from './pages/Auth/SingUp/SingUpContainer';
 import HomeContainer from './pages/Home/HomeContainer';
 import RootPageContainer from './pages/Root/RootPageContainer';
-import UserContainer from './pages/User/UserContainer';
 
 function App() {
   return (
@@ -17,12 +17,11 @@ function App() {
       <Navbar hasSidebar />
       <div>
         <Switch>
-          <Route path="/" exact component={RootPageContainer} />
-          <Route path="/home" exact component={HomeContainer} />
-          <Route path="/login" exact component={LogInContainer} />
-          <Route path="/singup" exact component={SingUpContainer} />
-          <Route path="/user" exact component={UserContainer} />
-          <Route path="*" component={NotFoundError} />
+          <Route path={routes.ROOT} exact component={RootPageContainer} />
+          <Route path={routes.HOME} exact component={HomeContainer} />
+          <Route path={routes.LOG_IN} exact component={LogInContainer} />
+          <Route path={routes.SING_UP} exact component={SingUpContainer} />
+          <Route path={routes.NOT_FOUND} component={NotFoundError} />
         </Switch>
       </div>
     </div>
