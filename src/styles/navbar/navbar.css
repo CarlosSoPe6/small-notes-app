@@ -32,6 +32,10 @@ nav > div.navbar-content {
     justify-content: space-between;
 }
 
+nav > div.navbar-content.full {
+    width: 100%;
+}
+
 nav > div.navbar-content.collapsed {
     width: calc(100% - 80px);
     display: flex;

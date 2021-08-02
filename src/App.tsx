@@ -14,7 +14,7 @@ import RootPageContainer from './pages/Root/RootPageContainer';
 function App() {
   return (
     <div>
-      <Navbar hasSidebar />
+      <Navbar />
       <div>
         <Switch>
           <Route path={routes.ROOT} exact component={RootPageContainer} />
