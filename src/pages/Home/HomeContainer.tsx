@@ -34,8 +34,6 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
   }, [dispatch]);
   const onRemoveNote = useCallback(() => {
     if (loadedNote !== undefined) {
-      // eslint-disable-next-line no-debugger
-      debugger;
       const note: Note = notes[loadedNote];
       dispatch(removeNote(note.id));
     }
