@@ -8,6 +8,7 @@ export type OnSidebarElementClickHandler = (id: number) => void;
 export interface SidebarProps {
   items: SidebarItem[];
   isCollapsed?: boolean;
+  selectedIndex?: number;
   onClick: OnSidebarElementClickHandler,
   onAddNote: () => void;
   onRemoveNote: () => void;
@@ -16,6 +17,7 @@ export interface SidebarProps {
 const Sidebar: FC<SidebarProps> = function Sidebar({
   items,
   isCollapsed,
+  selectedIndex,
   onClick,
   onAddNote,
   onRemoveNote,
@@ -37,7 +39,7 @@ const Sidebar: FC<SidebarProps> = function Sidebar({
           >
             { items.map((item, index) => (
               <SidebarElement
-                          index={index}
+                          selected={selectedIndex === index}
                           key={item.key}
                           item={item}
                           onClickHandler={onItemClickHandlder}

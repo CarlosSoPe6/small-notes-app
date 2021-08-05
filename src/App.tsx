@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import AlertDialogSpawner from './components/AlertDialogSpawner';
 import Navbar from './components/Navbar/Navbar';
 import routes from './config/routes';
 import NotFoundError from './navigation/NotFound';
@@ -24,6 +25,7 @@ function App() {
           <Route path={routes.NOT_FOUND} component={NotFoundError} />
         </Switch>
       </div>
+      <AlertDialogSpawner />
     </div>
   );
 }
