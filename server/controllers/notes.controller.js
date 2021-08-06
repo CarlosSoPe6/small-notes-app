@@ -10,7 +10,6 @@ async function getAllNotes(req, res) {
   const { sessionUser: { username } } = req;
   try {
     const query = await NotesModel.getNotesByUser(username);
-    console.log(query);
     if (query.length === 0) {
       return res.sendStatus(404);
     }

@@ -3,11 +3,10 @@ const dbconfig = require('../config/db');
 class DBClient {
   constructor(schema, modelName, listProjection) {
     this.schema = new dbconfig.Schema(schema);
-    this.model = dbconfig.model(modelName, this.schema);
+    this.model = dbconfig.model(modelName, this.schema, modelName);
     this.listProjection = listProjection;
   }
-  async query(query, projection = {}, options = {}) {
-    console.log(this.model, query, projection);
+  async query(query, projection = {}) {
     return await this.model.find(query, projection);
   }
   async queryOne(query, projection = {}, options = {}) {
@@ -25,7 +24,6 @@ class DBClient {
     return await this.model.deleteOne(query, (err, obj) => {
       if (err)
         throw err;
-      console.log("Document deleted");
     });
   }
 }

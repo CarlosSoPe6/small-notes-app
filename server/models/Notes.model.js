@@ -38,7 +38,7 @@ class Notes extends DBClient {
   }
 
   async getNotesByUser (username) {
-    const query = { "username": username };
+    const query = { username };
     return await super.query(query, this.listProjection);
   }
 
