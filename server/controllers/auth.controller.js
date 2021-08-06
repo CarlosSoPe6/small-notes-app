@@ -1,14 +1,14 @@
-import { JWT_EXPIRES_IN, JWT_TOKEN_TYPE } from '../config/auth';
-import { singToken } from '../services/jwt.service';
+const { JWT_EXPIRES_IN, JWT_TOKEN_TYPE } = require('../config/auth');
+const { singToken }  = require('../services/jwt.service');
 
 /**
  * Login action
  * @param {Express.Request} req Request Object
  * @param {Express.Response} res Response Object
  */
-export function login(req, res) {
+function login(req, res) {
     const { username, password } = req.body;
-    // Do auth
+    // TODO: Do auth
     const accessToken = singToken({username});
     res.status(201).json({
       access_token: accessToken,
@@ -22,6 +22,11 @@ export function login(req, res) {
  * @param {Express.Request} req Request Object
  * @param {Express.Response} res Response Object
  */
-export function singin(req, res) {
+function singin(req, res) {
   res.sendStatus(418);
 }
+
+module.exports = {
+  login,
+  singin,
+};

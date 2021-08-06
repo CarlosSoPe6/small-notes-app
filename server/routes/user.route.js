@@ -1,9 +1,9 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
-import { getSessionUser } from '../controllers/user.controller';
+const { getSessionUser } = require( '../controllers/user.controller');
 
 const router = Router();
 
 router.get('/', getSessionUser);
 
-export default router;
+module.exports = router;

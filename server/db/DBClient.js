@@ -1,4 +1,4 @@
-import dbconfig from '../config/db';
+const dbconfig = require('../config/db');
 
 class DBClient {
   constructor(schema, modelName, listProjection) {
@@ -7,7 +7,8 @@ class DBClient {
     this.listProjection = listProjection;
   }
   async query(query, projection = {}, options = {}) {
-    return await this.model.find(query, projection, options);
+    console.log(this.model, query, projection);
+    return await this.model.find(query, projection);
   }
   async queryOne(query, projection = {}, options = {}) {
     return await this.model.findOne(query, projection, options);
@@ -30,4 +31,4 @@ class DBClient {
 }
 
 
-export default DBClient;
+module.exports = DBClient;

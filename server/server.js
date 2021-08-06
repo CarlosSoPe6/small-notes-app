@@ -1,8 +1,8 @@
-import { listen } from './app';
+const app = require('./app');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
-listen(port, () => {
+const server = app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Application running on port ${port} with ${process.env.NODE_ENV} envrioment`);
 });

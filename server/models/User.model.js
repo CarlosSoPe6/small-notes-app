@@ -28,4 +28,4 @@ class User extends DBClient {
   }
 }
 
-export default new User();
+module.exports = new User();

@@ -20,7 +20,7 @@ const schema = {
   }
 };
 
-const modelName = 'Users';
+const modelName = 'Notes';
 
 const projection = {
   'id': 1,
@@ -38,13 +38,13 @@ class Notes extends DBClient {
   }
 
   async getNotesByUser (username) {
-    const query = { 'username': username };
-    return await super.query(query, super.listProjection);
+    const query = { "username": username };
+    return await super.query(query, this.listProjection);
   }
 
   async getSingleNote (id) {
-    const query = { 'id': id };
-    return await super.queryOne(query, super.listProjection);
+    const query = { id };
+    return await super.queryOne(query, this.listProjection);
   }
 
   async createNote (title, body, username) {
@@ -58,8 +58,8 @@ class Notes extends DBClient {
 
   async updateNote (id, title, body, username) {
     const query = {
-      'id': id,
-      'username': username
+      id,
+      username
     };
     const note = await this.getSingleNote(id);
     if (note === undefined) {
@@ -72,11 +72,11 @@ class Notes extends DBClient {
 
   async deleteNote(id, username) {
     const query = {
-      'id': id,
-      'username': username,
+      id,
+      username,
     };
     return await super.delete(query);
   }
 }
 
-export default new Notes();
+module.exports = new Notes();

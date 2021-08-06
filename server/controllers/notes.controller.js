@@ -1,4 +1,4 @@
-import NotesModel from "../models/Notes.model";
+const NotesModel = require('../models/Notes.model');
 
 /**
  * Gets all the notes of the session user
@@ -6,15 +6,17 @@ import NotesModel from "../models/Notes.model";
  * @param {Express.Request} req Request Object
  * @param {Express.Response} res Response Object
  */
-export async function getAllNotes(req, res) {
+async function getAllNotes(req, res) {
   const { sessionUser: { username } } = req;
   try {
     const query = await NotesModel.getNotesByUser(username);
+    console.log(query);
     if (query.length === 0) {
       return res.sendStatus(404);
     }
     res.json(query);
-  } catch {
+  } catch (e) {
+    console.log(e);
     res.sendStatus(500);
   }
 }
@@ -25,7 +27,7 @@ export async function getAllNotes(req, res) {
  * @param {Express.Request} req Request Object
  * @param {Express.Response} res Response Object
  */
-export async function createNote(req, res) {
+async function createNote(req, res) {
   const { title, body } = req.body;
   const { sessionUser: { username } } = req;
   try {
@@ -42,7 +44,7 @@ export async function createNote(req, res) {
  * @param {Express.Request} req Request Object
  * @param {Express.Response} res Response Object
  */
-export async function updateNote(req, res) {
+async function updateNote(req, res) {
   const { id, title, body } = req.body;
   const { sessionUser: { username } } = req;
   try {
@@ -59,7 +61,7 @@ export async function updateNote(req, res) {
  * @param {Express.Request} req Request Object
  * @param {Express.Response} res Response Object
  */
-export async function deleteNote(req, res) {
+async function deleteNote(req, res) {
   const { id, title, body } = req.body;
   const { sessionUser: { username } } = req;
   try {
@@ -69,3 +71,10 @@ export async function deleteNote(req, res) {
     res.sendStatus(500);
   }
 }
+
+module.exports = {
+  getAllNotes,
+  createNote,
+  updateNote,
+  deleteNote,
+};

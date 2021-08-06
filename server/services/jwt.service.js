@@ -1,17 +1,17 @@
-import jwt from 'jsonwebtoken';
-import {
+const jwt = require('jsonwebtoken');
+const {
   JWT_ALGORITHM,
   JWT_AUDIENCE,
   JWT_EXPIRES_IN,
   JWT_ISSUER,
   JWT_SECRET
-} from '../config/auth';
+} = require('../config/auth');
 
 /**
  * Generates a singed token
  * @param {Object} payload Payload to insert
  */
-export function singToken(payload) {
+function singToken(payload) {
   return jwt.sign(payload, JWT_SECRET, {
     expiresIn: JWT_EXPIRES_IN,
     audience: JWT_AUDIENCE,
@@ -26,7 +26,7 @@ export function singToken(payload) {
  * @param {(err: Error, decoded: jwt.JwtPayload) => void | undefined} onVerified OnVerified callback
  * @returns {void | Promise<jwt.JwtPayload>}
  */
-export function verifyToken(token, onVerified) {
+function verifyToken(token, onVerified) {
   const verifyToken = {
     issuer: JWT_ISSUER,
     audience: JWT_AUDIENCE
@@ -34,7 +34,7 @@ export function verifyToken(token, onVerified) {
   const verifyWithCallback = (verifyCallback) => {
     jwt.verify(token, JWT_SECRET, verifyToken, verifyCallback)
   }
-  if (onVerified === undefined) {
+  if (onVerified !== undefined) {
     return verifyWithCallback(onVerified);
   }
   return new Promise((resolve, reject) => {
@@ -46,3 +46,8 @@ export function verifyToken(token, onVerified) {
     });
   })
 }
+
+module.exports = {
+  singToken,
+  verifyToken,
+};

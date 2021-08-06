@@ -1,16 +1,17 @@
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 
-import authRouter from './routes/auth.route';
-import notesRouter from './routes/notes.route';
-import userRouter from './routes/user.route';
-import { authenticate } from './middlewares/authenticate.middleware';
+const authRouter = require('./routes/auth.route');
+const notesRouter = require('./routes/notes.route');
+const userRouter = require('./routes/user.route');
+const authenticate = require('./middlewares/authenticate.middleware');
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
-app.route('/api/auth', authRouter);
-app.route('/api/notes', authenticate, notesRouter);
-app.route('/api/user', authenticate, userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/notes', authenticate, notesRouter);
+app.use('/api/user', authenticate, userRouter);
 
-export default app;
+module.exports = app;
