@@ -29,10 +29,11 @@ async function getAllNotes(req, res) {
 async function createNote(req, res) {
   const { title, body } = req.body;
   const { sessionUser: { username } } = req;
+
   try {
     const query = await NotesModel.createNote(title, body, username);
-    res.sendStatus(201);
-  } catch {
+    res.status(201).json(query);
+  } catch (e) {
     res.sendStatus(500);
   }
 }
@@ -61,10 +62,11 @@ async function updateNote(req, res) {
  * @param {Express.Response} res Response Object
  */
 async function deleteNote(req, res) {
-  const { id, title, body } = req.body;
+  const { id } = req.params;
   const { sessionUser: { username } } = req;
   try {
     const result = await NotesModel.deleteNote(id, username);
+    console.log(result);
     res.status(200).json(result);
   } catch {
     res.sendStatus(500);

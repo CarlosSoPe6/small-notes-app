@@ -4,7 +4,6 @@ import AppStateReducerError from './AppStateReducerError';
 
 export interface AppStateState {
   sidebarCollapsed: boolean;
-  auth: null | boolean;
   alertDialogOnAccept: () => void;
   alertDialogOnCancel: () => void;
   alertDialogText: string;
@@ -13,7 +12,6 @@ export interface AppStateState {
 
 const initialState: AppStateState = {
   sidebarCollapsed: false,
-  auth: null,
   alertDialogSpawns: false,
   alertDialogOnAccept: () => {},
   alertDialogOnCancel: () => {},
@@ -23,10 +21,6 @@ const initialState: AppStateState = {
 const toogleCollapse = (state: AppStateState): AppStateState => {
   const { sidebarCollapsed } = state;
   return { ...state, sidebarCollapsed: (!sidebarCollapsed) };
-};
-
-const attempLogin = (state: AppStateState): AppStateState => {
-  return { ...state, auth: true };
 };
 
 const hideAlertDialog = (state: AppStateState): AppStateState => ({
@@ -59,8 +53,6 @@ const appStateReducer: Reducer<AppStateState, AppStateAction> =
   switch (type) {
     case 'APP_STATE::TOOGLE_COLLAPSE':
       return toogleCollapse(state);
-    case 'APP_STATE::ATTEMP_LOGIN':
-      return attempLogin(state);
     case 'APP_STATE::HIDE_ALERT_DIALOG':
       return hideAlertDialog(state);
     case 'APP_STATE::SHOW_ALERT_DIALOG':

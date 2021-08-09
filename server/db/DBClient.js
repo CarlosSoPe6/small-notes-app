@@ -7,10 +7,12 @@ class DBClient {
     this.listProjection = listProjection;
   }
   async query(query, projection = {}) {
-    return await this.model.find(query, projection);
+    const docs = await this.model.find(query, projection);
+    return docs;
   }
   async queryOne(query, projection = {}, options = {}) {
-    return await this.model.findOne(query, projection, options);
+    const doc = await this.model.findOne(query, projection, options);
+    return doc;
   }
   async update(query, dataObject) {
     return await this.model.findOneAndUpdate(query, { $set: dataObject }, {
@@ -21,10 +23,7 @@ class DBClient {
     return await document.save();
   }
   async delete(query) {
-    return await this.model.deleteOne(query, (err, obj) => {
-      if (err)
-        throw err;
-    });
+    return await this.model.deleteOne(query);
   }
 }
 

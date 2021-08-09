@@ -1,15 +1,32 @@
+import LoginService, { LoginServiceFunction } from './auth/login';
+
 class Service {
   private headers: HeadersInit;
 
-  constructor(public baseUrl: string) {
+  private expiresIn?: Date;
+
+  private lastLogin?: Date;
+
+  constructor(
+    public baseUrl: string,
+    public authenticationService: LoginServiceFunction,
+  ) {
     this.headers = {
       'Content-Type': 'application/json',
     };
   }
 
+  private setAuthorization(token: string) {
+    this.headers = { ...this.headers, Authorization: `bearer ${token}` };
+  }
+
+  initService(token: string) {
+    this.setAuthorization(token);
+  }
+
   get(resource: string) {
     const uri = `${this.baseUrl}${resource}`;
-    const reqInit = { method: 'GET' };
+    const reqInit = { method: 'GET', headers: this.headers };
     return fetch(uri, reqInit);
   }
 
@@ -34,13 +51,13 @@ class Service {
 
   delete(resource: string) {
     const uri = `${this.baseUrl}${resource}`;
-    const reqInit = { method: 'DELETE' };
+    const reqInit: RequestInit = { method: 'DELETE', headers: this.headers };
     return fetch(uri, reqInit);
   }
 }
 
-const apiUrl = process.env.API_URL || 'http://localhost:8080/';
+const apiUrl = process.env.API_URL || 'http://localhost:8080/api/';
 
-const service = new Service(apiUrl);
+const service = new Service(apiUrl, LoginService);
 
 export default service;

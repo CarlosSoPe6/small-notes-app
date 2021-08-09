@@ -12,7 +12,7 @@ const schema = {
   },
   body: {
     type: String,
-    required: true,
+    default: '',
   },
   username: {
     type: String,
@@ -48,12 +48,12 @@ class Notes extends DBClient {
   }
 
   async createNote (title, body, username) {
-    const note = new super.model({
+    const note = new this.model({
       title,
       body,
       username,
     });
-    return await super.save(note);
+    return await super.create(note);
   }
 
   async updateNote (id, title, body, username) {
@@ -75,6 +75,7 @@ class Notes extends DBClient {
       id,
       username,
     };
+    console.log(query);
     return await super.delete(query);
   }
 }
