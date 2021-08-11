@@ -32,7 +32,8 @@
     "react::eject": "react-scripts eject",
     "server::start-dev": "env-cmd -f .env node server/server.js ",
     "server::start": "node server/server.js",
-    "serve": "json-server data/mock-notes.json -p 8080"
+    "serve": "json-server data/mock-notes.json -p 8080",
+    "start": "npm run server::start"
   },
   "eslintConfig": {
     "extends": [
