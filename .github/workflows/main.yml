@@ -1,0 +1,57 @@
+# This is a basic workflow to help you get started with Actions
+name: CD
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Sets the envioment variables
+    env:
+      API_URL: ${{secrets.API_URL}}
+      MONGO_USER: ${{secrets.MONGO_USER}}
+      MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+      MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}
+      MONGO_CLUSTER: ${{secrets.MONGO_CLUSTER}}
+      JWT_ALGORITHM: ${{secrets.JWT_ALGORITHM}}
+      JWT_AUDIENCE: ${{secrets.JWT_AUDIENCE}}
+      JWT_ISSUER: ${{secrets.JWT_ISSUER}}
+      JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
+      JWT_SECRET: ${{secrets.JWT_SECRET}}
+      JWT_TOKEN_TYPE: ${{secrets.JWT_TOKEN_TYPE}}
+      PORT: ${{secrets.PORT}}
+      NODE_ENV: ${{secrets.NODE_ENV}}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # Installs nodejs
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.4.0
+        with:
+          node-version: "14.17.1"
+      # Installs node deps
+      - name: Install node deps
+        run: npm install
+      # Build react app with react-scripts build
+      - name: Build react app
+        run: npm run react::build
+      # Move react build ouput from /build to /server/public
+      - name: Move React output
+        run: cp build server/public/ -r
+      # Deploy to heroku
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        name: Deploy to heroku
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+      
+      
