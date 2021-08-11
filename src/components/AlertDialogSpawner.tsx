@@ -31,7 +31,6 @@ const AlertDialogSpawner: FC<AlertDialogSpawnerProps> =
       text,
       spawns,
     } = useAlertDialogSpawner();
-    console.log(text, spawns);
     return (
       <div className="alert-dialog-spawner">
         {spawns && <AlertDialog text={text} onAccept={onAccept} onCancel={onCancel} />}

@@ -14,7 +14,6 @@ export interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = function Navbar(): JSX.Element {
   const history = useHistory();
-  console.log(history.location.pathname, routes.HOME, history.location.pathname === routes.HOME);
   const hasSidebar = history.location.pathname === routes.HOME;
   const isCollapsed = useSelector<GlobalState, boolean>(state => state.appState.sidebarCollapsed);
   const menuItems = useNavbar();
