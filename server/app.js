@@ -7,7 +7,7 @@ const notesRouter = require('./routes/notes.route');
 const userRouter = require('./routes/user.route');
 const authenticate = require('./middlewares/authenticate.middleware');
 
-const STATIC_FILES_PATH = path.join(__dirname, 'public');
+const STATIC_FILES_PATH = path.join(__dirname, 'public/build');
 const app = express();
 app.use(cors());
 app.use(express.json());
