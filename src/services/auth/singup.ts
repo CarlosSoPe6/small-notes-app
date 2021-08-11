@@ -1,3 +1,4 @@
+import { auth } from '../../config/apiURLs';
 import UserForm from '../../models/UserForm';
 
 async function singup(user: UserForm) {
@@ -9,7 +10,7 @@ async function singup(user: UserForm) {
     },
     body,
   };
-  const response = await fetch('/api/singup', requestOptions);
+  const response = await fetch(auth.singup, requestOptions);
   const json = await response.json();
   return json;
 }

@@ -12,17 +12,16 @@ export interface SidebarItem {
 
 export interface SidebarElementProps {
   item: SidebarItem;
-  index: number
+  selected: boolean
   onClickHandler: OnSidebarItemClickHandler;
 }
 
 const SidebarElement: FC<SidebarElementProps> = function SidebarElement(props): JSX.Element {
-  const { item, index, onClickHandler } = props;
+  const { item, selected, onClickHandler } = props;
   const { id, name, key } = item;
   return (
-    <li className="sidebar-item">
+    <li className={`sidebar-item ${selected ? 'selected' : ''}`}>
       <button
-        tabIndex={-index}
         onClick={() => onClickHandler(id)}
         name={name}
         type="button"

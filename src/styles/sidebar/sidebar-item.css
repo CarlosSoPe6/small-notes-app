@@ -12,3 +12,7 @@ li.sidebar-item button {
     border: none;
     box-sizing: border-box;
 }
+
+li.sidebar-item.selected button {
+    background-color: rgb(219, 219, 219);
+}

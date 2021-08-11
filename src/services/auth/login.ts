@@ -1,4 +1,13 @@
+import { auth } from '../../config/apiURLs';
 import UserForm from '../../models/UserForm';
+
+export interface LoginResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+}
+
+export type LoginServiceFunction = (user: Pick<UserForm, 'username' | 'password'>) => Promise<LoginResponse>;
 
 async function login(user: Pick<UserForm, 'username' | 'password'>) {
   const body = JSON.stringify(user);
@@ -9,8 +18,8 @@ async function login(user: Pick<UserForm, 'username' | 'password'>) {
     },
     body,
   };
-  const response = await fetch('/api/login', requestOptions);
-  const json = await response.json();
+  const response = await fetch(auth.logIn, requestOptions);
+  const json: LoginResponse = await response.json();
   return json;
 }
 

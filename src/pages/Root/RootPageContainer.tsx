@@ -2,21 +2,20 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { attempLogin } from '../../redux/actions/appStateActions';
+import routes from '../../config/routes';
 import { GlobalState } from '../../redux/reducers/rootReducer';
 
 const RootPageContainer = () => {
   const history = useHistory();
   const authState: boolean | null = useSelector<GlobalState, boolean | null>((state) => {
-    return state.appState.auth;
+    return state.auth.isAuthenticated;
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    if (authState === null) {
-      dispatch(attempLogin());
+    if (authState) {
+      history.replace(routes.HOME);
     } else {
-      const newRoute = authState ? '/home' : '/login';
-      history.replace(newRoute);
+      history.replace(routes.LOG_IN);
     }
   }, [authState, dispatch, history]);
   return (<div />);

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import routes from '../config/routes';
 import { GlobalState } from '../redux/reducers/rootReducer';
 
 const useAuthRedirect = () => {
@@ -8,7 +9,7 @@ const useAuthRedirect = () => {
   const history = useHistory();
   useEffect(() => {
     if (isAuth) {
-      history.replace('/');
+      history.replace(routes.ROOT);
     }
   }, [history, isAuth]);
 };
