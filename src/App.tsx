@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Switch,
   Route,
@@ -11,8 +12,16 @@ import LogInContainer from './pages/Auth/LogIn/LogInContainer';
 import SingUpContainer from './pages/Auth/SingUp/SingUpContainer';
 import HomeContainer from './pages/Home/HomeContainer';
 import RootPageContainer from './pages/Root/RootPageContainer';
+import { initSession } from './redux/actions/authActions';
+import tokenUtils from './services/auth/session';
 
 function App() {
+  const dispatch = useDispatch();
+  const sessionInfo = tokenUtils.getToken();
+  if (sessionInfo !== null) {
+    const [token, expiresIn] = sessionInfo;
+    dispatch(initSession(token, expiresIn));
+  }
   return (
     <div>
       <Navbar />
