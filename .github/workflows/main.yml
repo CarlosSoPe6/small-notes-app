@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     # Sets the envioment variables
     env:
-      API_URL: ${{secrets.API_URL}}
+      REACT_APP_API_URL: ${{secrets.API_URL}}
       MONGO_USER: ${{secrets.MONGO_USER}}
       MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
       MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}

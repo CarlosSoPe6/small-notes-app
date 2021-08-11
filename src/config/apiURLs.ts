@@ -1,4 +1,4 @@
-const ROOT_URL = process.env.API_URL || 'http://localhost:8080/api/';
+const ROOT_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api/';
 
 export const notes = {
   getAll: () => 'notes',
