@@ -45,7 +45,9 @@ jobs:
         run: npm run react::build
       # Move react build ouput from /build to /server/public
       - name: Move React output
-        run: cp build server/public/ -r
+        run: |
+          mkdir server/public
+          cp build server/public -r
       # Deploy to heroku
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         name: Deploy to heroku
