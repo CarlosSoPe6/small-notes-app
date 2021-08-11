@@ -31,6 +31,7 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
   const onHideAlert = useCallback(() => {
     dispatch(hideAlertDialog());
   }, [dispatch]);
+
   const onConfirmDelete = useCallback(() => {
     if (loadedNote !== undefined) {
       const note: Note = notes[loadedNote];
@@ -38,6 +39,7 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
     }
     onHideAlert();
   }, [dispatch, loadedNote, notes, onHideAlert]);
+
   const onShowAlert = useCallback(() => {
     if (loadedNote !== undefined) {
       dispatch(showAlertDialog({
@@ -47,12 +49,15 @@ const HomeContainer: FC<HomeContainerProps> = function HomeContainer(): JSX.Elem
       }));
     }
   }, [dispatch, loadedNote, onConfirmDelete, onHideAlert]);
+
   const onDisplayTypeChange = useCallback(() => {
     dispatch(toogleDisplayType());
   }, [dispatch]);
+
   const onAddNote = useCallback(() => {
     dispatch(addNote('New note'));
   }, [dispatch]);
+
   return (
     <div className="main-content-container home-container">
         <Sidebar

@@ -51,9 +51,7 @@ export const loadAllNotes = () => {
 
 export const removeNote = (id: string) => {
   return async (dispatch: ThunkDispatch<void, GlobalState, EditorAction>) => {
-    const response = await notesService.deleteNote(id);
-    const { status } = response;
-    console.log(status);
+    await notesService.deleteNote(id);
     dispatch({
       type: EDITOR_REMOVE_NOTE,
     });
@@ -62,9 +60,7 @@ export const removeNote = (id: string) => {
 
 export const updateNote = (id: string, payload: Note) => {
   return async (dispatch: ThunkDispatch<void, GlobalState, EditorAction>) => {
-    const response = await notesService.updateNote(id, payload);
-    const { status } = response;
-    console.log(status);
+    await notesService.updateNote(id, payload);
     dispatch({
       type: EDITOR_UPDATE_NOTE,
       payload,
@@ -82,8 +78,6 @@ export const addNote = (title: string) => {
     const response = await notesService.createNote(payload);
     const data = await response.json();
     const { id } = data;
-    const { status } = response;
-    console.log(status);
     dispatch({
       type: EDITOR_ADD_NOTE,
       payload: { ...payload, id },

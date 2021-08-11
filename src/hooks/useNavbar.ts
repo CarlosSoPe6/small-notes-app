@@ -4,8 +4,8 @@ import routes from '../config/routes';
 import { GlobalState } from '../redux/reducers/rootReducer';
 
 const useNavbar = (): NavbarMenuItem[] => {
-  const authState: boolean | null = useSelector<GlobalState, boolean | null>((state) => {
-    return state.appState.auth;
+  const authState: boolean = useSelector<GlobalState, boolean>((state) => {
+    return state.auth.isAuthenticated;
   });
 
   if (authState) {

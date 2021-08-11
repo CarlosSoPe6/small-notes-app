@@ -3,7 +3,7 @@ import { AuthAction } from '../actions/authActions';
 
 export interface AuthState {
   isFetching: boolean;
-  isAuthenticated: boolean,
+  isAuthenticated: boolean;
 }
 
 const defaultState: AuthState = {
@@ -16,11 +16,18 @@ const beginRequest = (state: AuthState): AuthState => ({
   isFetching: true,
 });
 
-const endRequest = (state: AuthState): AuthState => ({
-  ...state,
-  isFetching: false,
-  isAuthenticated: true,
-});
+const endRequest = (state: AuthState, action: AuthAction): AuthState => {
+  const { payload } = action;
+  let isAuthenticated = false;
+  if (payload) {
+    isAuthenticated = true;
+  }
+  return {
+    ...state,
+    isFetching: false,
+    isAuthenticated,
+  };
+};
 
 const authReducer: Reducer<AuthState, AuthAction> = (state = defaultState, action) => {
   const { type } = action;
@@ -28,7 +35,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (state = defaultState, actio
     case 'AUTH::BEGIN_REQUEST':
       return beginRequest(state);
     case 'AUTH::END_REQUEST':
-      return endRequest(state);
+      return endRequest(state, action);
     default:
       return state;
   }
