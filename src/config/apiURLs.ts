@@ -8,7 +8,7 @@ export const notes = {
 };
 
 export const auth = {
-  singup: `${ROOT_URL}api/singup`,
+  singup: `${ROOT_URL}auth/singup`,
   logIn: `${ROOT_URL}auth/login`,
 };
 

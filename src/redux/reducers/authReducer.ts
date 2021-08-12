@@ -19,7 +19,7 @@ const beginRequest = (state: AuthState): AuthState => ({
 const endRequest = (state: AuthState, action: AuthAction): AuthState => {
   const { payload } = action;
   let isAuthenticated = false;
-  if (payload) {
+  if (payload !== undefined) {
     isAuthenticated = true;
   }
   return {

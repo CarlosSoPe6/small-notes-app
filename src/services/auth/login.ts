@@ -19,8 +19,12 @@ async function login(user: Pick<UserForm, 'username' | 'password'>) {
     body,
   };
   const response = await fetch(auth.logIn, requestOptions);
-  const json: LoginResponse = await response.json();
-  return json;
+  if (response.status === 201) {
+    const json: LoginResponse = await response.json();
+    return json;
+  }
+  const message = await response.text();
+  throw new Error(message);
 }
 
 export default login;

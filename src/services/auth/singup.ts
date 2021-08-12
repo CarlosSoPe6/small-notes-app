@@ -11,8 +11,12 @@ async function singup(user: UserForm) {
     body,
   };
   const response = await fetch(auth.singup, requestOptions);
-  const json = await response.json();
-  return json;
+  if (response.status === 201) {
+    const json = await response.text();
+    return json;
+  }
+  const message = await response.text();
+  throw new Error(message);
 }
 
 export default singup;

@@ -1,10 +1,10 @@
 const { Router } = require('express');
 
-const { login, singin } = require('../controllers/auth.controller');
+const { login, singup } = require('../controllers/auth.controller');
 
 const router = Router();
 
 router.post('/login', login);
-router.delete('/singin', singin);
+router.post('/singup', singup);
 
 module.exports = router;

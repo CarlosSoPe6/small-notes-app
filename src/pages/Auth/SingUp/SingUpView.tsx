@@ -4,7 +4,6 @@ import '../../../styles/singup/singup.css';
 
 export interface SingUpViewProps {
   usernameHandler: React.ChangeEventHandler<HTMLInputElement>;
-  emailHandler: React.ChangeEventHandler<HTMLInputElement>;
   passwordHandler: React.ChangeEventHandler<HTMLInputElement>;
   passwordConfirmationHandler: React.ChangeEventHandler<HTMLInputElement>;
   submitHandler: React.FormEventHandler<HTMLFormElement>;
@@ -13,22 +12,20 @@ export interface SingUpViewProps {
 
 const SingUpView: FC<SingUpViewProps> = ({
   usernameHandler,
-  emailHandler,
   passwordHandler,
   passwordConfirmationHandler,
+  submitHandler,
   isFetching,
 }) => {
   return (
   <div className="singup singup-content-container">
     <div className="singup-form-container">
-      <form>
+      <form onSubmit={submitHandler}>
         <label htmlFor="sgup-username">Username</label>
         <br />
         <input id="sgup-username" type="text" placeholder="Username" required onChange={usernameHandler} />
         <br />
         <label htmlFor="sgup-email">Email</label>
-        <br />
-        <input id="sgup-email" type="email" placeholder="Email" required onChange={emailHandler} />
         <br />
         <label htmlFor="sgup-password">Password</label>
         <br />

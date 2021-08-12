@@ -1,3 +1,4 @@
+const { HTTTP_STATUS_CODES } = require('../config/constants');
 const NotesModel = require('../models/Notes.model');
 
 /**
@@ -11,12 +12,12 @@ async function getAllNotes(req, res) {
   try {
     const query = await NotesModel.getNotesByUser(username);
     if (query.length === 0) {
-      return res.sendStatus(404);
+      return res.sendStatus(HTTTP_STATUS_CODES.NOT_FOUND);
     }
     res.json(query);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500);
+    res.sendStatus(HTTTP_STATUS_CODES.INTERNAL_ERROR);
   }
 }
 
@@ -32,9 +33,9 @@ async function createNote(req, res) {
 
   try {
     const query = await NotesModel.createNote(title, body, username);
-    res.status(201).json(query);
+    res.status(HTTTP_STATUS_CODES.CREATED).json(query);
   } catch (e) {
-    res.sendStatus(500);
+    res.sendStatus(HTTTP_STATUS_CODES.INTERNAL_ERROR);
   }
 }
 
@@ -49,9 +50,9 @@ async function updateNote(req, res) {
   const { sessionUser: { username } } = req;
   try {
     const result = await NotesModel.updateNote(id, title, body, username);
-    res.status(200).json(result);
+    res.status(HTTTP_STATUS_CODES.OK).json(result);
   } catch {
-    res.sendStatus(500);
+    res.sendStatus(HTTTP_STATUS_CODES.INTERNAL_ERROR);
   }
 }
 
@@ -67,9 +68,9 @@ async function deleteNote(req, res) {
   try {
     const result = await NotesModel.deleteNote(id, username);
     console.log(result);
-    res.status(200).json(result);
+    res.status(HTTTP_STATUS_CODES.OK).json(result);
   } catch {
-    res.sendStatus(500);
+    res.sendStatus(HTTTP_STATUS_CODES.INTERNAL_ERROR);
   }
 }
 
