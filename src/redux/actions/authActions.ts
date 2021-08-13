@@ -57,11 +57,21 @@ export const singup = (payload: UserForm, onErrordialog: AlertDialogPayload) => 
   return async (dispatch: ThunkDispatch<void, GlobalState, AuthAction | AppStateAction>) => {
     try {
       dispatch(beginRequest());
-      await singupService(payload);
+      const response = await singupService(payload);
+      const accessToken = response.access_token;
+      const expiresIn = response.expires_in;
+      service.initService(accessToken);
+      tokenUtils.setToken(accessToken, expiresIn);
+      if (accessToken) {
+        service.initService(accessToken);
+        tokenUtils.setToken(accessToken, expiresIn);
+        dispatch(endRequest({ ...response }));
+      } else {
+        dispatch(endRequest());
+      }
     } catch (e) {
       onErrordialog.text = `${e.message}`;
       dispatch(showAlertDialog(onErrordialog));
-    } finally {
       dispatch(endRequest());
     }
   };

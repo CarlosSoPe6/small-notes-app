@@ -1,5 +1,6 @@
 import { auth } from '../../config/apiURLs';
 import UserForm from '../../models/UserForm';
+import { LoginResponse } from './login';
 
 async function singup(user: UserForm) {
   const body = JSON.stringify(user);
@@ -10,9 +11,9 @@ async function singup(user: UserForm) {
     },
     body,
   };
-  const response = await fetch(auth.singup, requestOptions);
+  const response = await fetch(auth.logIn, requestOptions);
   if (response.status === 201) {
-    const json = await response.text();
+    const json: LoginResponse = await response.json();
     return json;
   }
   const message = await response.text();

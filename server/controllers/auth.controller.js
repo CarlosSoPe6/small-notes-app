@@ -45,7 +45,12 @@ async function singup(req, res) {
   try {
     const hash = await hashPassword(password);
     await UserModel.createUser(username, hash); 
-    res.sendStatus(HTTTP_STATUS_CODES.CREATED);
+    const accessToken = singToken({username});
+    res.status(HTTTP_STATUS_CODES.CREATED).json({
+      access_token: accessToken,
+      token_type: JWT_TOKEN_TYPE,
+      expires_in: JWT_EXPIRES_IN,
+    });
   } catch (e) {
     console.error(e);
     res.sendStatus(HTTTP_STATUS_CODES.INTERNAL_ERROR).send(ERROR_MESSAGES.error());
