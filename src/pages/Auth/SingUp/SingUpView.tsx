@@ -25,8 +25,6 @@ const SingUpView: FC<SingUpViewProps> = ({
         <br />
         <input id="sgup-username" type="text" placeholder="Username" required onChange={usernameHandler} />
         <br />
-        <label htmlFor="sgup-email">Email</label>
-        <br />
         <label htmlFor="sgup-password">Password</label>
         <br />
         <input id="sgup-password" type="password" placeholder="Password" required pattern="([a-zA-Z\d]){8,}" onChange={passwordHandler} />
